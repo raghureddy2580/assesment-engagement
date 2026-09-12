@@ -1,10 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
-import { CircleAlert, ChevronLeft, ChevronRight, MapPin, Mail, Music, Phone, Shield, Sparkles, Utensils, Gem, GlassWater, Mic2, VolumeX } from "lucide-react";
+import { CircleAlert, CakeSlice, ChevronLeft, ChevronRight, MapPin, Mail, Music, Music2, Phone, Shield, Sparkles, Utensils, Gem, Slash } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import brideAsset from "@/assets/bride.png.asset.json";
-import groomAsset from "@/assets/groom.png.asset.json";
-import invitationNationLogo from "@/assets/invitation-nation-logo.png.asset.json";
 
 const assets = {
   aboutleft: "https://cdn-admin.invitationnation.in/media/eng007/assets/7c4eb5b8-a110-4d39-98aa-a0525259863f_aboutleft.svg",
@@ -31,18 +28,19 @@ const assets = {
   wishestop: "https://cdn-admin.invitationnation.in/media/eng007/assets/c0e60ffa-27e6-403c-aced-928487cfcea8_wishestop.svg",
 };
 
-const eventDate = new Date("2026-09-14T10:00:00");
-const mapUrl = "https://www.google.com/maps?q=royal+orchid+convention+center&ll=12.9716,77.5946&z=17";
+const eventDate = new Date("2026-10-31T10:00:00");
+const mapUrl = "https://www.google.com/maps/search/?api=1&query=Hall+Complex%2C+1st+B+Cross+Road%2C+7th+Block%2C+Koramangala%2C+Bengaluru%2C+Karnataka%2C+India";
+const bridePhoto = "https://cdn-admin.invitationnation.in/admin/templates/6a47a55399d0f228a2447a9a/5c6d525c-5ff5-47e5-ac52-895a120389ca_image.jpg";
+const groomPhoto = "https://cdn-admin.invitationnation.in/admin/templates/6a47a55399d0f228a2447a9a/eda11278-f82b-4c3c-9f69-b15336041793_image.jpg";
 const wishes = [
-  { message: "May your life together be filled with endless love, laughter, and beautiful memories. Congratulations on your engagement!", author: "Priya & Rohan" },
-  { message: "Wishing you both a lifetime of happiness as you begin this wonderful new chapter together.", author: "The Sharma Family" },
-  { message: "Two beautiful souls, one beautiful promise. May every day bring you closer and make your love stronger.", author: "Meera" },
+  { message: "Congratulations on your engagement! May this lovely chapter be filled with love, laughter, unforgettable moments, and beautiful dreams. Wishing you both a lifetime of happiness and togetherness ahead.", author: "Adithya" },
+  { message: "May your engagement be the start of a beautiful journey where love grows deeper, laughter becomes sweeter, and each shared dream brings you ever closer. Wishing you endless happiness and joy together.", author: "Manya" },
+  { message: "May your engagement mark the beginning of a lifetime filled with love, joy, and unforgettable moments together.", author: "Mahesh" },
 ];
 const schedule = [
-  { name: "Ring Ceremony", time: "10:30 AM", Icon: Gem },
-  { name: "Champagne Toast", time: "11:30 AM", Icon: GlassWater },
-  { name: "Gala Lunch", time: "01:00 PM", Icon: Utensils },
-  { name: "Live Music", time: "02:30 PM", Icon: Mic2 },
+  { name: "Ring Ceremony", time: "11:00 AM", Icon: Gem },
+  { name: "Cake Cutting", time: "11:30 AM", Icon: CakeSlice },
+  { name: "Lunch", time: "01:00 PM", Icon: Utensils },
 ];
 
 function useCountdown() {
@@ -131,7 +129,7 @@ export function Eng007Home() {
       </nav>
       <audio ref={audioRef} src="https://cdn-admin.invitationnation.in/muisc/VibeDepot+-+Indian.mp3" loop preload="none" />
       <a id="call-btn" className="round-action" href="tel:+911234567890" aria-label="Call"><Phone size={22} fill="currentColor" /></a>
-      <button id="music-btn-main" className="round-action" onClick={toggleMusic} aria-label={muted ? "Turn music on" : "Mute music"}>{muted ? <VolumeX size={25} /> : <Music size={25} />}</button>
+      <button id="music-btn-main" className="round-action" onClick={toggleMusic} aria-label={muted ? "Turn music on" : "Mute music"}>{muted ? <span className="muted-music-icon"><Music2 size={25} /><Slash size={31} /></span> : <Music size={25} />}</button>
 
       <main>
         <section id="home" className="hero-section">
@@ -141,8 +139,8 @@ export function Eng007Home() {
           <div className="eng-container hero-inner">
             <div className="hero-copy">
               <div><p className="accent-copy">Save the date</p><h1><span>Ananya Sharma</span><span>&amp;</span><span>Aarav Verma</span></h1></div>
-              <div><p className="accent-copy">are getting engaged on</p><p className="hero-date">Monday | 14th Sep | 2026</p></div>
-              <div><p className="venue-name">Royal Orchid Convention Center</p><button className="script-button" onClick={() => window.open(mapUrl, "_blank")}>Open in Maps</button></div>
+              <div><p className="accent-copy">are getting engaged on</p><p className="hero-date">Saturday | 31st Oct | 2026</p></div>
+              <div><p className="venue-name">Hall Complex</p><button className="script-button" onClick={() => window.open(mapUrl, "_blank")}>Open in Maps</button></div>
             </div>
             <div className="hero-visual"><img className="hero-couple" src={assets.herocouple} alt="Illustration of Ananya and Aarav" /></div>
           </div>
@@ -158,8 +156,8 @@ export function Eng007Home() {
         <section id="about" className="about-section">
           <img className="section-texture" src={assets.texture} alt="" /><img className="about-left-decor" src={assets.aboutleft} alt="" /><img className="about-right-decor" src={assets.aboutright} alt="" />
           <div className="eng-container about-inner">
-            <article className="couple-row bride-row"><div className="portrait bride-photo"><img className="photo" src={brideAsset.url} alt="Ananya Sharma" /><img className="portrait-sprig bride-sprig" src={assets.brideside} alt="" /></div><div className="couple-info bride-info"><h2>Ananya Sharma</h2><h3>D/o Mr. &amp; Mrs. Sharma</h3><p>A graceful, compassionate soul with a radiant smile, deeply rooted in family values while embracing new dreams.</p><img src={assets.brideleaf} alt="" /></div></article>
-            <article className="couple-row groom-row"><div className="couple-info groom-info"><h2>Aarav Verma</h2><h3>S/o Mr. &amp; Mrs. Verma</h3><p>A warm-hearted and ambitious individual known for integrity, kindness, and a calm, reassuring presence.</p><img src={assets.groomleaf} alt="" /></div><div className="portrait groom-photo"><img className="photo" src={groomAsset.url} alt="Aarav Verma" /><img className="portrait-sprig groom-sprig" src={assets.groomside} alt="" /></div></article>
+            <article className="couple-row bride-row"><div className="portrait bride-photo"><img className="photo" src={bridePhoto} alt="Ananya Sharma" /><img className="portrait-sprig bride-sprig" src={assets.brideside} alt="" /></div><div className="couple-info bride-info"><h2>Ananya Sharma</h2><h3>D/o Mr. Rajesh &amp; Mrs. Sunita Sharma</h3><p>A free spirit wrapped in grace, Ananya moves through life with quiet confidence, an infectious laugh, and a kindness that makes everyone around her feel at home.</p><img src={assets.brideleaf} alt="" /></div></article>
+            <article className="couple-row groom-row"><div className="couple-info groom-info"><h2>Aarav Verma</h2><h3>S/o Mr. Anand &amp; Mrs. Kavitha Verma</h3><p>A gentle soul with a poet&apos;s heart and an architect&apos;s mind, Aarav finds beauty in the details, whether in the curve of a building or the warmth of a quiet afternoon.</p><img src={assets.groomleaf} alt="" /></div><div className="portrait groom-photo"><img className="photo" src={groomPhoto} alt="Aarav Verma" /><img className="portrait-sprig groom-sprig" src={assets.groomside} alt="" /></div></article>
           </div>
         </section>
 
@@ -170,14 +168,13 @@ export function Eng007Home() {
 
         <section className="send-section"><img className="section-texture" src={assets.texture} alt="" /><div className="eng-container send-inner"><div className="send-copy"><img src={assets.quotes} alt="" /><h2>Send your wishes</h2><p>“Leave your blessings and spread a little more love”</p></div><div className="send-box"><img className="form-top" src={assets.bordershort} alt="" /><img className="form-bottom" src={assets.bordershort} alt="" /><img className="form-left" src={assets.borderlong} alt="" /><img className="form-right" src={assets.borderlong} alt="" /><form onSubmit={submitWish}>{submitted ? <div className="thank-you"><Sparkles /><h3>Thank you!</h3><p>Your warm wishes mean so much.</p></div> : <><input aria-label="Your Name" placeholder="Your Name" required /><div className="textarea-wrap"><textarea aria-label="Your Wishes" placeholder="Your Wishes" required /><button type="button" aria-label="Help me write a wish"><Sparkles /></button></div><button className="submit-wish" type="submit">Submit</button></>}</form><img className="form-flower" src={assets.wishesflower} alt="" /></div></div></section>
 
-        <section className="schedule-section"><div className="eng-container"><header className="schedule-header"><img src={assets.groomleaf} alt="" /><h2 className="schedule-title">Engagement celebration begins</h2><img src={assets.brideleaf} alt="" /></header><div className="schedule-grid">{schedule.map(({ name, time, Icon }) => <article className="schedule-card" key={name}><img src={assets.countflowerleft} alt="" /><div className="schedule-icon"><Icon size={38} /></div><h3>{name}</h3><p>{time}</p><img className="card-flower" src={assets.wishesflower} alt="" /></article>)}</div><div className="schedule-dots"><span className="active" /><span /><span /></div></div></section>
+        <section className="schedule-section"><div className="eng-container"><header className="schedule-header"><img src={assets.groomleaf} alt="" /><h2 className="schedule-title">Engagement celebration begins</h2><img src={assets.brideleaf} alt="" /></header><div className="schedule-grid">{schedule.map(({ name, time, Icon }) => <article className="schedule-card" key={name}><img src={assets.countflowerleft} alt="" /><div className="schedule-icon"><Icon size={38} /></div><h3>{name}</h3><p>{time}</p><img className="card-flower" src={assets.wishesflower} alt="" /></article>)}</div></div></section>
 
-        <section className="location-section"><img className="location-decor loc-tl" src={assets.topleft} alt="" /><img className="location-decor loc-tr" src={assets.topleft} alt="" /><img className="location-decor loc-bl" src={assets.bottomright} alt="" /><img className="location-decor loc-br" src={assets.bottomright} alt="" /><div className="eng-container"><h2 className="location-title">Location</h2><div className="location-grid"><div className="map-wrap"><iframe title="Royal Orchid Convention Center map" src="https://www.google.com/maps?q=Royal%20Orchid%20Convention%20Center&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div><article className="location-card"><p className="location-date">14th September, 2026</p><h3>Royal Orchid<br />Convention Center</h3><p>Royal Palace, HAL 2nd Stage, Bengaluru, Karnataka 560008</p><button className="map-pill" onClick={() => window.open(mapUrl, "_blank")}><MapPin /> <span>Open in maps</span></button></article></div></div></section>
+        <section className="location-section"><img className="location-decor loc-tl" src={assets.topleft} alt="" /><img className="location-decor loc-tr" src={assets.topleft} alt="" /><img className="location-decor loc-bl" src={assets.bottomright} alt="" /><img className="location-decor loc-br" src={assets.bottomright} alt="" /><div className="eng-container"><h2 className="location-title">Location</h2><div className="location-grid"><div className="map-wrap"><iframe title="Hall Complex map" src="https://www.google.com/maps?q=Hall%20Complex%2C%201st%20B%20Cross%20Road%2C%207th%20Block%2C%20Koramangala%2C%20Bengaluru%2C%20Karnataka%2C%20India&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div><article className="location-card"><p className="location-date">31ST OCTOBER, 2026</p><h3>Hall Complex</h3><p>Hall Complex, 1st B Cross Road, 7th Block, Koramangala, Bengaluru, Karnataka, India</p><button className="map-pill" onClick={() => window.open(mapUrl, "_blank")}><MapPin /> <span>Open in maps</span></button></article></div></div></section>
       </main>
       <footer className="invitation-footer">
         <div className="footer-branding">
-          <div className="footer-heading"><span>Engagement Invitation website by</span><strong>Invitationnation</strong></div>
-          <img src={invitationNationLogo.url} alt="Invitation Nation logo" />
+          <div className="footer-heading"><span>Engagement Invitation website by</span><strong>INVITATIONNATION</strong></div>
         </div>
         <div className="footer-bottom">
           <div className="footer-content">
