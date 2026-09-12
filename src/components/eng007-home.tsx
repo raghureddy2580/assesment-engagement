@@ -66,6 +66,7 @@ export function Eng007Home() {
   const [muted, setMuted] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const countdown = useCountdown();
+  const currentWish = wishes[wishIndex] ?? { message: "Wishing you a lifetime of happiness.", author: "With love" };
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -144,7 +145,7 @@ export function Eng007Home() {
 
         <section id="gallery" className="wishes-section">
           <img className="wish-side wish-left" src={assets.wishesleft} alt="" /><img className="wish-side wish-right" src={assets.wishesright} alt="" /><img className="wish-horizontal wish-top" src={assets.wishestop} alt="" /><img className="wish-horizontal wish-bottom" src={assets.wishesbottom} alt="" />
-          <div className="wishes-inner"><img className="quote-mark" src={assets.quotes} alt="" /><h2>Wishes For The Couple</h2><div className="wish-copy"><p>{wishes[wishIndex].message}</p><span>— {wishes[wishIndex].author}</span></div><div className="wish-controls"><button onClick={() => setWishIndex((wishIndex + wishes.length - 1) % wishes.length)} aria-label="Previous wish"><ChevronLeft /></button><span>{wishIndex + 1}/{wishes.length}</span><button onClick={() => setWishIndex((wishIndex + 1) % wishes.length)} aria-label="Next wish"><ChevronRight /></button></div><img className="wishes-flower" src={assets.wishesflower} alt="" /></div>
+          <div className="wishes-inner"><img className="quote-mark" src={assets.quotes} alt="" /><h2>Wishes For The Couple</h2><div className="wish-copy"><p>{currentWish.message}</p><span>— {currentWish.author}</span></div><div className="wish-controls"><button onClick={() => setWishIndex((wishIndex + wishes.length - 1) % wishes.length)} aria-label="Previous wish"><ChevronLeft /></button><span>{wishIndex + 1}/{wishes.length}</span><button onClick={() => setWishIndex((wishIndex + 1) % wishes.length)} aria-label="Next wish"><ChevronRight /></button></div><img className="wishes-flower" src={assets.wishesflower} alt="" /></div>
         </section>
 
         <section className="send-section"><img className="section-texture" src={assets.texture} alt="" /><div className="eng-container send-inner"><div className="send-copy"><img src={assets.quotes} alt="" /><h2>Send your wishes</h2><p>“Leave your blessings and spread a little more love”</p></div><div className="send-box"><img className="form-top" src={assets.bordershort} alt="" /><img className="form-bottom" src={assets.bordershort} alt="" /><img className="form-left" src={assets.borderlong} alt="" /><img className="form-right" src={assets.borderlong} alt="" /><form onSubmit={submitWish}>{submitted ? <div className="thank-you"><Sparkles /><h3>Thank you!</h3><p>Your warm wishes mean so much.</p></div> : <><input aria-label="Your Name" placeholder="Your Name" required /><div className="textarea-wrap"><textarea aria-label="Your Wishes" placeholder="Your Wishes" required /><button type="button" aria-label="Help me write a wish"><Sparkles /></button></div><button className="submit-wish" type="submit">Submit</button></>}</form><img className="form-flower" src={assets.wishesflower} alt="" /></div></div></section>
