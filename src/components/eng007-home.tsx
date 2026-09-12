@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "re
 import { ChevronLeft, ChevronRight, MapPin, Music, Music2, Phone, Sparkles, Utensils, Gem, GlassWater, Mic2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import brideAsset from "@/assets/bride.png.asset.json";
+import groomAsset from "@/assets/groom.png.asset.json";
 
 const assets = {
   aboutleft: "https://cdn-admin.invitationnation.in/media/eng007/assets/7c4eb5b8-a110-4d39-98aa-a0525259863f_aboutleft.svg",
@@ -139,8 +141,8 @@ export function Eng007Home() {
         <section id="about" className="about-section">
           <img className="section-texture" src={assets.texture} alt="" /><img className="about-left-decor" src={assets.aboutleft} alt="" /><img className="about-right-decor" src={assets.aboutright} alt="" />
           <div className="eng-container about-inner">
-            <article className="couple-row bride-row"><div className="portrait bride-photo"><img className="photo" src="https://images.unsplash.com/photo-1542764824-4cdbd6c92dbe?auto=format&fit=crop&w=600&q=80" alt="Ananya Sharma" /><img className="portrait-sprig bride-sprig" src={assets.brideside} alt="" /></div><div className="couple-info bride-info"><h2>Ananya Sharma</h2><h3>D/o Mr. &amp; Mrs. Sharma</h3><p>A graceful, compassionate soul with a radiant smile, deeply rooted in family values while embracing new dreams.</p><img src={assets.brideleaf} alt="" /></div></article>
-            <article className="couple-row groom-row"><div className="couple-info groom-info"><h2>Aarav Verma</h2><h3>S/o Mr. &amp; Mrs. Verma</h3><p>A warm-hearted and ambitious individual known for integrity, kindness, and a calm, reassuring presence.</p><img src={assets.groomleaf} alt="" /></div><div className="portrait groom-photo"><img className="photo" src="https://images.unsplash.com/photo-1541346160430-93fcee38d521?auto=format&fit=crop&w=600&q=80" alt="Aarav Verma" /><img className="portrait-sprig groom-sprig" src={assets.groomside} alt="" /></div></article>
+            <article className="couple-row bride-row"><div className="portrait bride-photo"><img className="photo" src={brideAsset.url} alt="Ananya Sharma" /><img className="portrait-sprig bride-sprig" src={assets.brideside} alt="" /></div><div className="couple-info bride-info"><h2>Ananya Sharma</h2><h3>D/o Mr. &amp; Mrs. Sharma</h3><p>A graceful, compassionate soul with a radiant smile, deeply rooted in family values while embracing new dreams.</p><img src={assets.brideleaf} alt="" /></div></article>
+            <article className="couple-row groom-row"><div className="couple-info groom-info"><h2>Aarav Verma</h2><h3>S/o Mr. &amp; Mrs. Verma</h3><p>A warm-hearted and ambitious individual known for integrity, kindness, and a calm, reassuring presence.</p><img src={assets.groomleaf} alt="" /></div><div className="portrait groom-photo"><img className="photo" src={groomAsset.url} alt="Aarav Verma" /><img className="portrait-sprig groom-sprig" src={assets.groomside} alt="" /></div></article>
           </div>
         </section>
 
