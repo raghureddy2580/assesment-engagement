@@ -43,8 +43,8 @@ const schedule = [
 ];
 
 function useCountdown() {
-  const calculate = () => {
-    const distance = Math.max(0, eventDate.getTime() - Date.now());
+  const calculate = (now: number) => {
+    const distance = Math.max(0, eventDate.getTime() - now);
     return {
       days: Math.floor(distance / 86_400_000),
       hrs: Math.floor((distance / 3_600_000) % 24),
@@ -52,9 +52,10 @@ function useCountdown() {
       secs: Math.floor((distance / 1_000) % 60),
     };
   };
-  const [time, setTime] = useState(calculate);
+  const [time, setTime] = useState({ days: 0, hrs: 0, mins: 0, secs: 0 });
   useEffect(() => {
-    const timer = window.setInterval(() => setTime(calculate()), 1000);
+    setTime(calculate(Date.now()));
+    const timer = window.setInterval(() => setTime(calculate(Date.now())), 1000);
     return () => window.clearInterval(timer);
   }, []);
   return time;
