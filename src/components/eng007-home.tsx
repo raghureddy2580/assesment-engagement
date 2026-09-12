@@ -1,9 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Music, Music2, Phone, Sparkles, Utensils, Gem, GlassWater, Mic2 } from "lucide-react";
+import { CircleAlert, ChevronLeft, ChevronRight, MapPin, Mail, Music, Phone, Shield, Sparkles, Utensils, Gem, GlassWater, Mic2, VolumeX } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import brideAsset from "@/assets/bride.png.asset.json";
 import groomAsset from "@/assets/groom.png.asset.json";
+import invitationNationLogo from "@/assets/invitation-nation-logo.png.asset.json";
 
 const assets = {
   aboutleft: "https://cdn-admin.invitationnation.in/media/eng007/assets/7c4eb5b8-a110-4d39-98aa-a0525259863f_aboutleft.svg",
@@ -65,6 +66,7 @@ function useCountdown() {
 
 export function Eng007Home() {
   const pageRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [wishIndex, setWishIndex] = useState(0);
   const [muted, setMuted] = useState(true);
   const [submitted, setSubmitted] = useState(false);
@@ -106,15 +108,30 @@ export function Eng007Home() {
     setSubmitted(true);
   };
 
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (muted) {
+      try {
+        await audio.play();
+        setMuted(false);
+      } catch {
+        setMuted(true);
+      }
+    } else {
+      audio.pause();
+      setMuted(true);
+    }
+  };
+
   return (
     <div className="eng007-page" ref={pageRef}>
       <nav className="eng007-nav" aria-label="Primary navigation">
         <a href="#home" className="active">Home</a><a href="#about">About</a><a href="#gallery">Gallery</a>
       </nav>
-      <div className="floating-actions">
-        <a className="round-action" href="tel:+911234567890" aria-label="Call"><Phone size={22} /></a>
-        <button className="round-action" onClick={() => setMuted((value) => !value)} aria-label={muted ? "Turn music on" : "Mute music"}>{muted ? <Music size={22} /> : <Music2 size={22} />}</button>
-      </div>
+      <audio ref={audioRef} src="https://cdn-admin.invitationnation.in/muisc/VibeDepot+-+Indian.mp3" loop preload="none" />
+      <a id="call-btn" className="round-action" href="tel:+911234567890" aria-label="Call"><Phone size={22} fill="currentColor" /></a>
+      <button id="music-btn-main" className="round-action" onClick={toggleMusic} aria-label={muted ? "Turn music on" : "Mute music"}>{muted ? <VolumeX size={25} /> : <Music size={25} />}</button>
 
       <main>
         <section id="home" className="hero-section">
@@ -157,6 +174,23 @@ export function Eng007Home() {
 
         <section className="location-section"><img className="location-decor loc-tl" src={assets.topleft} alt="" /><img className="location-decor loc-tr" src={assets.topleft} alt="" /><img className="location-decor loc-bl" src={assets.bottomright} alt="" /><img className="location-decor loc-br" src={assets.bottomright} alt="" /><div className="eng-container"><h2 className="location-title">Location</h2><div className="location-grid"><div className="map-wrap"><iframe title="Royal Orchid Convention Center map" src="https://www.google.com/maps?q=Royal%20Orchid%20Convention%20Center&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div><article className="location-card"><p className="location-date">14th September, 2026</p><h3>Royal Orchid<br />Convention Center</h3><p>Royal Palace, HAL 2nd Stage, Bengaluru, Karnataka 560008</p><button className="map-pill" onClick={() => window.open(mapUrl, "_blank")}><MapPin /> <span>Open in maps</span></button></article></div></div></section>
       </main>
+      <footer className="invitation-footer">
+        <div className="footer-branding">
+          <div className="footer-heading"><span>Engagement Invitation website by</span><strong>Invitationnation</strong></div>
+          <img src={invitationNationLogo.url} alt="Invitation Nation logo" />
+        </div>
+        <div className="footer-bottom">
+          <div className="footer-content">
+            <nav className="footer-links" aria-label="Support links">
+              <a href="#report"><CircleAlert size={19} fill="currentColor" /><span>Report a Problem</span></a>
+              <a href="mailto:marketing@codenimbussolutions.com?subject=Invitation Support"><Mail size={19} fill="currentColor" /><span>Contact Support</span></a>
+              <a href="https://invitationnation.in/privacy" target="_blank" rel="noreferrer"><Shield size={19} fill="currentColor" /><span>Privacy Policy</span></a>
+            </nav>
+            <p className="footer-powered">Powered by <a href="https://invitationnation.in" target="_blank" rel="noreferrer">Invitation Nation</a></p>
+            <div className="footer-legal"><p>© 2026 Invitation Nation. All rights reserved. Crafted with care for your forever.</p></div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
